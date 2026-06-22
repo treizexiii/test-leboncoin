@@ -28,3 +28,57 @@ go build -o dist/main .
 cp config.yml dist
 ./dist/main
 ```
+# Endpoints
+
+### `api/fizzbuzz` POST
+
+Request:
+```json
+{
+    "num1": 2,
+    "num2": 5,
+    "limit": 15,
+    "str1": "Fizz",
+    "str2": "Buzz"
+}
+```
+
+Response:
+```json
+{
+  "result": [
+    "1",
+    "Fizz",
+    "3",
+    "Fizz",
+    "Buzz",
+    "Fizz",
+    "7",
+    "Fizz",
+    "9",
+    "FizzBuzz",
+    "11",
+    "Fizz",
+    "13",
+    "Fizz",
+    "Buzz"
+  ]
+}
+```
+
+### `api/stats` GET
+
+Response
+
+```json
+{
+  "count": 7,
+  "top_requests": {
+    "num1": 2,
+    "num2": 5,
+    "limit": 15,
+    "str1": "Fizz",
+    "str2": "Buzz"
+  }
+}
+```

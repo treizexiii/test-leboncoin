@@ -8,8 +8,9 @@ import (
 // Registered services
 var counter = services.NewRequestCounter()
 
+// Registered routes
 func RegisterRoutes(api *gin.RouterGroup) *gin.RouterGroup {
-	api.GET("/fizzbuzz", FizzBuzzRoute)
+	api.POST("/fizzbuzz", FizzBuzzRoute)
 	api.GET("/stats", StatsHandler)
 
 	return api
