@@ -1,0 +1,4 @@
+*.sum
+dist
+.gitignore
+.git
