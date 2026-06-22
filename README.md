@@ -9,3 +9,18 @@
   - method: GET
   - name: 'stats'
   - return: most reccurent requet
+
+# RUN
+
+Build and run with docker
+
+```bash
+docker compose up -d
+````
+
+build and run without docker
+```bash
+go build -o dist/main .
+cp config.yml dist
+./dist/main
+```
