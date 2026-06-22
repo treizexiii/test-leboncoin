@@ -1,0 +1,11 @@
+### FizzBuzz
+GET http://localhost:8080/api/fizzbuzz HTTP/1.1
+Content-Type: application/json
+
+{
+    "num1": 3,
+    "num2": 5,
+    "limit": 15,
+    "str1": "Fizz",
+    "str2": "Buzz"
+}
