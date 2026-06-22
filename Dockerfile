@@ -10,7 +10,6 @@ COPY config.yaml dist/config.yaml
 FROM debian:latest
 
 WORKDIR /app
-COPY --from=BUILD /app/dist/main .
-EXPOSE 8080
+COPY --from=BUILD /app/dist .
 
 CMD ["./main"]

@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import "github.com/spf13/viper"
+import (
+	"fmt"
+
+	"github.com/spf13/viper"
+)
 
 type Config struct {
 	Server struct {
@@ -17,7 +20,7 @@ var Cfg Config
 
 func Load(path string) error {
 	viper.SetConfigName("config")
-	
+
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(path)
 	viper.AddConfigPath(".")
@@ -26,7 +29,8 @@ func Load(path string) error {
 	viper.SetDefault("cors.allowed_origins", []string{"*"})
 
 	viper.SetEnvPrefix("APP")
-	viper.AutomaticEnv()
+	viper.BindEnv("server.port", "APP_SERVER_PORT")
+	viper.BindEnv("cors.allowed_origins", "APP_CORS_ALLOWED_ORIGINS")
 
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
@@ -36,6 +40,17 @@ func Load(path string) error {
 
 	if err := viper.Unmarshal(&Cfg); err != nil {
 		return fmt.Errorf("error unmarshalling config: %w", err)
+	}
+
+	p := viper.Get("APP_SERVER_PORT")
+	println(fmt.Sprintf("port:%v", p))
+
+	if port := viper.GetInt("APP_SERVER_PORT"); port != 0 {
+		Cfg.Server.Port = port
+	}
+
+	if origins := viper.GetStringSlice("APP_CORS_ALLOWED_ORIGINS"); len(origins) > 0 {
+		Cfg.Cors.AllowedOrigins = origins
 	}
 
 	return nil

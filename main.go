@@ -40,5 +40,7 @@ func main() {
 
 	handlers.RegisterRoutes(api)
 
+	println(fmt.Sprintf("port:%d", Cfg.Server.Port))
+
 	srv.Run(fmt.Sprintf(":%d", Cfg.Server.Port))
 }
