@@ -4,7 +4,8 @@ COPY . /app
 WORKDIR /app
 
 RUN go mod tidy
-RUN go build -o dist/main . 
+RUN go build -o dist/main .
+COPY config.yaml dist/config.yaml
 
 FROM debian:latest
 

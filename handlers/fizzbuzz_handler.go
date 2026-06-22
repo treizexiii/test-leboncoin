@@ -5,20 +5,16 @@ import (
 	"github.com/treizexiii/test-leboncoin/services"
 )
 
-type FizzBuzzRequest struct {
-	Num1  int    `json:"num1"`
-	Num2  int    `json:"num2"`
-	Limit int    `json:"limit"`
-	Str1  string `json:"str1"`
-	Str2  string `json:"str2"`
-}
-
 func FizzBuzzRoute(c *gin.Context) {
-	var request FizzBuzzRequest
-	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+	var request *services.FizzBuzzRequest
+	c.ShouldBindBodyWithJSON(&request)
+	if request == nil || !request.Validate() {
+		c.JSON(400, gin.H{
+			"error": "Invalid request",
+		})
 		return
 	}
+	counter.Increment(*request)
 
 	result := services.FizzBuzz(request.Num1, request.Num2, request.Limit, request.Str1, request.Str2)
 

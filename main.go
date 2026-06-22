@@ -30,6 +30,7 @@ func main() {
 	api := srv.Group("/api", cors.New(config))
 
 	api.Use(middlewares.LoggerMiddleware())
+	// api.Use(middlewares.DeserializeJSON(&services.FizzBuzzRequest{}))
 
 	api.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{

@@ -2,10 +2,33 @@ package services
 
 import "fmt"
 
-// Take 2 multiples num1 & num2
-// Limite loop to limit
-// Replace num1 with str1 and num2 with str2
-// return an array of strings with the result
+type FizzBuzzRequest struct {
+	Num1  int    `json:"num1" binding:"required"`
+	Num2  int    `json:"num2" binding:"required"`
+	Limit int    `json:"limit" binding:"required"`
+	Str1  string `json:"str1" binding:"required"`
+	Str2  string `json:"str2" binding:"required"`
+}
+
+func (r *FizzBuzzRequest) Validate() bool {
+	if r.Num1 <= 0 {
+		return false
+	}
+	if r.Num2 <= 0 {
+		return false
+	}
+	if r.Limit <= 0 {
+		return false
+	}
+	if r.Str1 == "" {
+		return false
+	}
+	if r.Str2 == "" {
+		return false
+	}
+	return true
+}
+
 func FizzBuzz(num1 int, num2 int, limit int, str1 string, str2 string) []string {
 	resut := make([]string, 0, limit)
 

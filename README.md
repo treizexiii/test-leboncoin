@@ -10,7 +10,11 @@
   - name: 'stats'
   - return: most reccurent requet
 
-# RUN
+# Config
+
+Rewrite your own config file or override them with env variable (use APP_ as a prefix)
+
+# Run
 
 Build and run with docker
 
